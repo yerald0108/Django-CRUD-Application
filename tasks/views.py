@@ -13,7 +13,7 @@ def signup(request):
 
     if request.method == 'GET':
         return render(request, 'signup.html', {
-        'from': UserCreationForm
+        'form': UserCreationForm
         })
     else:
             if request.POST['password1'] == request.POST['password2']:
@@ -26,11 +26,11 @@ def signup(request):
                     return redirect('tasks')
                 except IntegrityError:
                     return render(request, 'signup.html', {
-                        'from': UserCreationForm,
+                        'form': UserCreationForm,
                         "error": 'Username already exists'
                     })
             return render(request, 'signup.html', {
-                        'from': UserCreationForm,
+                        'form': UserCreationForm,
                         "error": 'Password do not match'
                     })
 
@@ -44,7 +44,7 @@ def signout(request):
 def signin(request):
     if request.method == 'GET':
         return render(request, 'signin.html', {
-            'from': AuthenticationForm
+            'form': AuthenticationForm
         })
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
